@@ -42,7 +42,7 @@ that use the libinotifytools library.
 %summary
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}/upstream
 #%%patch1 -p1
 #%%patch2 -p1
 
