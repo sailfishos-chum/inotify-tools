@@ -15,11 +15,17 @@ inotify-tools is a set of command-line programs for Linux providing
 a simple interface to inotify. These programs can be used to monitor
 and act upon filesystem events.
 
+%if "%{?vendor}" == "chum"
+PackageName: inotify-tools
+PackagerName: nephros
 Type: console-application
 Categories:
   - System
   - Utility
-
+Custom:
+  Repo:          https://github.com/inotify-tools/inotify-tools
+  PackagingRepo: https://github.com/sailfishos-chum/inotify-tools
+%endif
 
 %package        devel
 Summary:        Headers and libraries for building apps that use libinotifytools
