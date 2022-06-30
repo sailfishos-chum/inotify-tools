@@ -1,5 +1,5 @@
 Name:           inotify-tools
-Version:        3.21.9.6
+Version:        3.22.6.0
 Release:        0
 Summary:        Command line utilities for inotify
 
