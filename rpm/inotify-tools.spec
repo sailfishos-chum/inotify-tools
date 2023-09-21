@@ -1,5 +1,5 @@
 Name:           inotify-tools
-Version:        3.22.6.0
+Version:        4.23.9.0
 Release:        0
 Summary:        Command line utilities for inotify
 
@@ -15,9 +15,9 @@ inotify-tools is a set of command-line programs for Linux providing
 a simple interface to inotify. These programs can be used to monitor
 and act upon filesystem events.
 
-%if "%{?vendor}" == "chum"
-PackageName: inotify-tools
-PackagerName: nephros
+%if 0%{?_chum}
+Title: inotify-tools
+PackagedBy: nephros
 Type: console-application
 Categories:
   - System
@@ -48,7 +48,6 @@ that use the libinotifytools library.
 
 
 %build
-#./autogen.sh
 %reconfigure \
         --disable-dependency-tracking \
         --disable-static \
@@ -63,7 +62,6 @@ rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 
 find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
-# We'll install documentation in the proper place
 rm -rf %{buildroot}/%{_datadir}/doc/
 
 %post -p /sbin/ldconfig
@@ -79,13 +77,11 @@ rm -rf %{buildroot}/%{_datadir}/doc/
 
 %files doc
 %defattr(-,root,root,-)
-#%%doc AUTHORS COPYING ChangeLog NEWS README
 %doc AUTHORS COPYING NEWS README.md
 %{_mandir}/man1/*.1.gz
 
 %files devel
 %defattr(-,root,root,-)
-#%%doc libinotifytools/src/doc/html/*
 %dir %{_includedir}/inotifytools/
 %{_includedir}/inotifytools/*.h
 %{_libdir}/libinotifytools.so
