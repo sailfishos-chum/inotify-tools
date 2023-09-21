@@ -32,16 +32,9 @@ Summary:        Headers and libraries for building apps that use libinotifytools
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
-%package        doc
-Summary:        Documentation for %{name}
-Group:          Development/Libraries
-
 %description    devel
 This package contains headers and libraries required to build applications
 that use the libinotifytools library.
-
-%description    doc
-%summary
 
 %prep
 %setup -q -n %{name}-%{version}/upstream
@@ -52,18 +45,13 @@ that use the libinotifytools library.
         --disable-dependency-tracking \
         --disable-static \
         --disable-doxygen \
-        CFLAGS="$RPM_OPT_FLAGS -fPIC -pie" \
-        CXXFLAGS="$RPM_OPT_FLAGS -fPIC -pie"
-make %{?_smp_mflags}
+        --disable-doc
+%make_build
 
 
 %install
-rm -rf %{buildroot}
-make install DESTDIR=%{buildroot}
-
-find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
-rm -rf %{buildroot}/%{_datadir}/doc/
-
+%make_install
+rm -rf %{buildroot}%{_mandir}
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
@@ -71,14 +59,10 @@ rm -rf %{buildroot}/%{_datadir}/doc/
 
 %files
 %defattr(-,root,root,-)
+%license COPYING
 %{_bindir}/inotifywait
 %{_bindir}/inotifywatch
 %{_libdir}/libinotifytools.so.*
-
-%files doc
-%defattr(-,root,root,-)
-%doc AUTHORS COPYING NEWS README.md
-%{_mandir}/man1/*.1.gz
 
 %files devel
 %defattr(-,root,root,-)
