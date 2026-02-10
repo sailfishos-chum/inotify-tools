@@ -59,14 +59,14 @@ rm -rf %{buildroot}%{_mandir}
 
 
 %files
-%defattr(-,root,root,-)
 %license COPYING
+%{_bindir}/fsnotifywait
+%{_bindir}/fsnotifywatch
 %{_bindir}/inotifywait
 %{_bindir}/inotifywatch
 %{_libdir}/libinotifytools.so.*
 
 %files devel
-%defattr(-,root,root,-)
 %dir %{_includedir}/inotifytools/
 %{_includedir}/inotifytools/*.h
 %{_libdir}/libinotifytools.so
